@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, ArrowLeft, ArrowRight, Calendar, MapPin, X } from 'react-feather';
@@ -134,8 +134,9 @@ const PhotoGrid = styled.div`
   z-index: 1;
   
   @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    padding: 0 0.5rem;
   }
 `;
 
@@ -149,6 +150,10 @@ const PhotoItem = styled(motion.div)`
   transition: all 0.5s ease;
   transform-style: preserve-3d;
   perspective: 1000px;
+
+  @media (max-width: 768px) {
+    height: 280px;
+  }
 
   &::before {
     content: '';
@@ -292,8 +297,9 @@ const ExpandedPhotoContainer = styled(motion.div)`
   
   @media (max-width: 768px) {
     max-width: 95%;
-    max-height: 80%;
+    max-height: 90vh;
     width: 100%;
+    justify-content: flex-start;
   }
 `;
 
@@ -304,8 +310,10 @@ const ExpandedPhoto = styled(motion.img)`
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
   
   @media (max-width: 768px) {
-    max-height: 50vh;
+    max-height: 45vh;
     object-fit: contain;
+    border-radius: 12px;
+    margin-top: 3rem;
   }
 `;
 
@@ -336,9 +344,11 @@ const DetailBox = styled(motion.div)`
   }
   
   @media (max-width: 768px) {
-    padding: 1.5rem;
+    padding: 1.2rem;
     margin-top: 1rem;
-    margin-bottom: 80px; /* Space for nav buttons */
+    border-radius: 12px;
+    max-height: calc(35vh - 80px);
+    overflow-y: auto;
   }
 `;
 
@@ -390,7 +400,8 @@ const NavButtons = styled.div`
   z-index: 102;
   
   @media (max-width: 768px) {
-    bottom: 15px;
+    bottom: 20px;
+    padding: 0 1rem;
   }
 `;
 
@@ -419,6 +430,7 @@ const NavButton = styled(motion.button)`
   @media (max-width: 768px) {
     width: 45px;
     height: 45px;
+    border-width: 1.5px;
   }
 `;
 
@@ -453,6 +465,7 @@ const CloseButton = styled(motion.button)`
     right: 15px;
     width: 40px;
     height: 40px;
+    border-width: 1.5px;
     
     svg {
       width: 20px;
@@ -476,7 +489,7 @@ const MemoryCount = styled.div`
   z-index: 102;
   
   @media (max-width: 768px) {
-    top: 20px;
+    top: 17px;
     padding: 0.3rem 1rem;
     font-size: 0.9rem;
   }
@@ -513,6 +526,23 @@ const Gallery = () => {
   const [likedPhotos, setLikedPhotos] = useState({});
   const photoContainerRef = useRef(null);
   
+  // Add a state to track if we're on a mobile device
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Check if we're on mobile on component mount
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile(); // Initial check
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
   // Remplacer par vos photos et leurs légendes
   const photos = [
     { 
@@ -678,10 +708,12 @@ const Gallery = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                drag="x"
+                drag={isMobile ? "x" : false}
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.2}
                 onDragEnd={(e, { offset, velocity }) => {
+                  if (!isMobile) return;
+                  
                   const swipe = offset.x;
                   if (Math.abs(swipe) > 50) {
                     handleSwipe(swipe);
