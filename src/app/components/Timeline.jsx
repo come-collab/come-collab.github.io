@@ -361,18 +361,6 @@ const EventHeader = styled.div`
   margin-bottom: 1rem;
 `;
 
-const EventDate = styled.div`
-  font-size: 1rem;
-  font-weight: 600;
-  color: ${props => props.color || props.theme.colors.primary};
-  display: flex;
-  align-items: center;
-  
-  svg {
-    margin-right: 6px;
-  }
-`;
-
 const EventLocation = styled.div`
   font-size: 0.9rem;
   color: ${props => props.theme.colors.lightText};
@@ -438,17 +426,25 @@ const Timeline = () => {
       color: "#FF9800"
     },
     {
+      date: "25 décembre 2022",
+      title: "Emmenagement à Nantes",
+      description: "Premier appartement ensemble si loin de notre Sud avec toutes les épreuves",
+      location: "Nantes",
+      color: "#4CAF50"
+    },
+    {
       date: "14 février 2023",
       title: "Récupération du fils",
       description: "Adoption du Francisco premier du nom pour la modique somme de 0€",
       location: "Nantes",
       color: "#2196F3"
     },
+
     {
       date: "25 décembre 2022",
-      title: "Emmenagement à Nantes",
-      description: "Premier appartement ensemble si loin de notre Sud avec toutes les épreuves",
-      location: "Nantes",
+      title: "Direction Pasteur Zoo",
+      description: "Retour à Nice, aller simple vers le bonheur",
+      location: "Nice",
       color: "#4CAF50"
     },
     {
@@ -736,10 +732,6 @@ const TimelineItem = ({ event, position, index, icon }) => {
       >
         <div className="ribbon"></div>
         <EventHeader>
-          <EventDate color={event.color}>
-            <Calendar size={16} />
-            {event.date}
-          </EventDate>
           <EventLocation>
             <MapPin size={16} />
             {event.location}
