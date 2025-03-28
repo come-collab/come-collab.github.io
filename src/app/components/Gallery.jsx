@@ -293,6 +293,7 @@ const ExpandedPhotoContainer = styled(motion.div)`
   @media (max-width: 768px) {
     max-width: 95%;
     max-height: 80%;
+    width: 100%;
   }
 `;
 
@@ -301,6 +302,11 @@ const ExpandedPhoto = styled(motion.img)`
   max-height: 70vh;
   border-radius: 16px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  
+  @media (max-width: 768px) {
+    max-height: 50vh;
+    object-fit: contain;
+  }
 `;
 
 const DetailBox = styled(motion.div)`
@@ -328,6 +334,12 @@ const DetailBox = styled(motion.div)`
       ${props => props.theme.colors.accent1},
       ${props => props.theme.colors.accent2});
   }
+  
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 80px; /* Space for nav buttons */
+  }
 `;
 
 const DetailCaption = styled.h3`
@@ -338,6 +350,11 @@ const DetailCaption = styled.h3`
   background: linear-gradient(45deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.secondary});
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+  }
 `;
 
 const DetailDescription = styled.p`
@@ -346,6 +363,12 @@ const DetailDescription = styled.p`
   margin-bottom: 1.2rem;
   line-height: 1.7;
   color: ${props => props.theme.colors.lightText};
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+  }
 `;
 
 const DetailMeta = styled.div`
@@ -357,13 +380,18 @@ const DetailMeta = styled.div`
 `;
 
 const NavButtons = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
   gap: 1rem;
+  z-index: 102;
+  
+  @media (max-width: 768px) {
+    bottom: 15px;
+  }
 `;
 
 const NavButton = styled(motion.button)`
@@ -387,6 +415,11 @@ const NavButton = styled(motion.button)`
   &:hover {
     background: rgba(255, 255, 255, 0.3);
   }
+  
+  @media (max-width: 768px) {
+    width: 45px;
+    height: 45px;
+  }
 `;
 
 const CloseButton = styled(motion.button)`
@@ -404,7 +437,7 @@ const CloseButton = styled(motion.button)`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 101;
+  z-index: 102;
   
   svg {
     width: 24px;
@@ -413,6 +446,18 @@ const CloseButton = styled(motion.button)`
   
   &:hover {
     background: rgba(255, 255, 255, 0.3);
+  }
+  
+  @media (max-width: 768px) {
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 `;
 
@@ -428,7 +473,15 @@ const MemoryCount = styled.div`
   font-size: 1.1rem;
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 102;
+  
+  @media (max-width: 768px) {
+    top: 20px;
+    padding: 0.3rem 1rem;
+    font-size: 0.9rem;
+  }
 `;
+
 const StyledPagination = styled.div`
   display: flex;
   justify-content: center;
@@ -458,6 +511,7 @@ const Gallery = () => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [likedPhotos, setLikedPhotos] = useState({});
+  const photoContainerRef = useRef(null);
   
   // Remplacer par vos photos et leurs légendes
   const photos = [
@@ -545,6 +599,15 @@ const Gallery = () => {
     );
     setSelectedImg(photos[currentIndex === 0 ? photos.length - 1 : currentIndex - 1]);
   };
+  
+  // Handle swipe for mobile
+  const handleSwipe = (direction) => {
+    if (direction > 0) {
+      handleNext();
+    } else {
+      handlePrev();
+    }
+  };
 
   return (
     <GalleryContainer id="gallery">
@@ -611,10 +674,20 @@ const Gallery = () => {
               </MemoryCount>
               
               <ExpandedPhotoContainer
+                ref={photoContainerRef}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(e, { offset, velocity }) => {
+                  const swipe = offset.x;
+                  if (Math.abs(swipe) > 50) {
+                    handleSwipe(swipe);
+                  }
+                }}
               >
                 <ExpandedPhoto 
                   src={selectedImg.src} 
@@ -638,25 +711,25 @@ const Gallery = () => {
                     </PhotoLocation>
                   </DetailMeta>
                 </DetailBox>
-                
-                <NavButtons>
-                  <NavButton
-                    onClick={handlePrev}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <ArrowLeft />
-                  </NavButton>
-                  
-                  <NavButton
-                    onClick={handleNext}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <ArrowRight />
-                  </NavButton>
-                </NavButtons>
               </ExpandedPhotoContainer>
+              
+              <NavButtons>
+                <NavButton
+                  onClick={handlePrev}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <ArrowLeft />
+                </NavButton>
+                
+                <NavButton
+                  onClick={handleNext}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <ArrowRight />
+                </NavButton>
+              </NavButtons>
               
               <CloseButton
                 onClick={() => setSelectedImg(null)}

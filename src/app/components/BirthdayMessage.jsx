@@ -355,7 +355,15 @@ const BirthdayMessage = ({ girlfriendName = "Emma", yourName = "John" }) => {
   const [completed, setCompleted] = useState(false);
   const [messageVisible, setMessageVisible] = useState(false);
   
-  const fullMessage = `<p>Ma beauté parfaite,</p><p>Aujourd'hui, alors que tu célèbres une autre année de ta <span class="highlight">belle vie</span>, je célèbre la joie incroyable que tu apportes à la mienne chaque jour. Depuis que tu es entrée dans mon monde, tout a changé pour le mieux.</p><p>Ton sourire illumine mes jours les plus sombres, ton rire est ma mélodie préférée, et ton amour est le <span class="highlight">plus beau cadeau</span> que j'ai jamais reçu. Tu m'inspires à être une meilleure personne par ta gentillesse, ta force et la façon passionnée dont tu embrasses la vie.</p><p>En ce jour spécial, je veux que tu saches que je chéris chaque moment que nous passons ensemble – de nos grandes aventures à nos soirées tranquilles à la maison. Chaque souvenir que nous créons est précieux pour moi.</p><p>Je te promets de continuer à t'aimer, à soutenir tes rêves, à te faire rire et à être ton partenaire dans toutes les aventures de la vie. Tu ne mérites que du <span class="highlight">bonheur</span>, et je ferai tout ce que je peux pour t'en apporter chaque jour.</p><p>Joyeux anniversaire, mon amour. Je lève mon verre à ta célébration aujourd'hui et à t'aimer pour toujours.</p>`;
+  const fullMessage = `<p>Ma beauté parfaite,</p><p>Aujourd'hui,
+   alors que tu célèbres une autre année de ta <span class="highlight">belle vie</span>, 
+   j'en profite pour te dire à quel point vivre avec toi m'apporte de la joie et du bonnheur. 
+     Tu m'inspires à être une meilleure personne par ta gentillesse, ta force, ton intelligence et par ta maniere de réfléchir.
+     </p><p>En ce jour spécial, je veux que tu saches que j'aime chaque moment que l'on passons ensemble –
+      de nos aventures à nos soirées tranquilles à la maison.
+      </p><p>Je te promets de continuer à t'aimer, à te faire rire et à être ton partenaire dans de la vie (mais donne moi 12 bizoz).
+       Tu ne mérites que du <span class="highlight">bonheur</span>, et je ferai tout ce que je peux pour t'en apporter chaque jour.
+       </p><p>Joyeux anniversaire, mon amour.</p>`;
 
   // Generate floating items with varied positions
   useEffect(() => {
