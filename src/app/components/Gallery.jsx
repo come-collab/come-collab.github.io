@@ -531,14 +531,14 @@ const Gallery = () => {
     },
     { 
       src: '/photos/photo1.JPG', 
-      caption: 'Notre emménagement à Nantes', 
+      caption: 'Bisous a nos anciens nous Nantais', 
       location: 'Nantes', 
       description: '',
       liked: false
     },
     { 
       src: '/photos/photo2.JPG', 
-      caption: 'Notre complicité intemporelle', 
+      caption: 'A Notre complicité de toujours', 
       location: 'Cagnes Sur Mer', 
       description: '',
       liked: false
@@ -566,7 +566,7 @@ const Gallery = () => {
     },
     { 
       src: '/photos/photo6.JPG', 
-      caption: 'Nos souvenirs', 
+      caption: 'A Nos super souvenirs', 
       location: 'La Mala', 
       description: '',
       liked: false
