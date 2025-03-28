@@ -462,7 +462,7 @@ const Gallery = () => {
   // Remplacer par vos photos et leurs légendes
   const photos = [
     { 
-      src: '/photos/photo7.jpg', 
+      src: '/photos/photo7.JPG', 
       caption: 'Toute belle', 
       location: 'La grosse Cala', 
       description: '',
@@ -476,14 +476,14 @@ const Gallery = () => {
       liked: false
     },
     { 
-      src: '/photos/photo1.jpg', 
+      src: '/photos/photo1.JPG', 
       caption: 'Notre emménagement à Nantes', 
       location: 'Nantes', 
       description: 'Le début de notre belle aventure ensemble. Notre premier chez nous, nos premiers pas dans cette ville qui allait devenir notre cocon.',
       liked: false
     },
     { 
-      src: '/photos/photo2.jpg', 
+      src: '/photos/photo2.JPG', 
       caption: 'Notre complicité intemporelle', 
       location: 'Cagnes Sur Mer', 
       description: 'Depuis le début, notre relation est remplie de rires et de joie. Notre amour n\'a fait que grandir au fil du temps, et notre complicité reste intacte.',
@@ -497,21 +497,21 @@ const Gallery = () => {
       liked: false
     },
     { 
-      src: '/photos/photo4.jpg', 
+      src: '/photos/photo4.JPG', 
       caption: 'Ton sourire qui illumine ma vie', 
       location: 'Cagnes Sur Maré', 
       description: 'Ta personnalité solaire et ton rire contagieux ont toujours été ma source de bonheur. Tu as ce don de rendre chaque moment spécial.',
       liked: false
     },
     { 
-      src: '/photos/photo5.jpg', 
+      src: '/photos/photo5.JPG', 
       caption: 'Nos moments de simplicité', 
       location: 'Fréjus', 
       description: 'Ces instants où on se fiche d\'être moches, où on est juste nous-mêmes. C\'est dans ces moments-là que je t\'aime le plus.',
       liked: false
     },
     { 
-      src: '/photos/photo6.jpg', 
+      src: '/photos/photo6.JPG', 
       caption: 'Nos souvenirs', 
       location: 'La Mala', 
       description: 'Chaque photo, chaque moment passé ensemble raconte notre histoire. Une collection de souvenirs précieux qui continue de s\'enrichir chaque jour.',
