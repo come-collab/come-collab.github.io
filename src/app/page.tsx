@@ -194,7 +194,7 @@ const GeometricDecorations = () => {
 };
 
 // Add a scroll-to-top button - client-side only
-const ScrollToTopButton = ({ theme }) => {
+const ScrollToTopButton = ({ theme }: { theme: any }) => {
   const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
