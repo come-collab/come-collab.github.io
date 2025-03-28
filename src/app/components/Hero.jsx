@@ -9,8 +9,16 @@ import Confetti from 'react-confetti';
 const HeroSection = styled.section`
   position: relative;
   height: 100vh;
+  /* Fix for mobile browsers where 100vh can include address bar */
+  min-height: -webkit-fill-available;
   width: 100%;
   overflow: hidden;
+  
+  /* Use this to prevent content overflow issues on small screens */
+  @media (max-width: 480px) {
+    height: auto;
+    min-height: 100vh;
+  }
 `;
 
 const ColorOverlay = styled.div`
@@ -75,6 +83,12 @@ const HeroContainer = styled.div`
   text-align: center;
   position: relative;
   z-index: 5;
+  
+  /* Fix for better spacing on small screens */
+  @media (max-width: 480px) {
+    padding: 2rem 0;
+    justify-content: flex-start;
+  }
 `;
 
 const ContentWrapper = styled(motion.div)`
@@ -110,6 +124,14 @@ const ContentWrapper = styled(motion.div)`
   @media (max-width: 768px) {
     padding: 2rem 1.5rem;
     margin: 0 0.5rem;
+  }
+  
+  /* Add smaller padding for very small screens */
+  @media (max-width: 480px) {
+    padding: 1.5rem 1rem;
+    margin: 0 0.5rem;
+    width: calc(100% - 1rem);
+    max-width: 100%;
   }
 `;
 
@@ -164,6 +186,12 @@ const HeroLayout = styled.div`
     padding: 1rem;
     height: auto;
     min-height: 100%;
+  }
+  
+  /* Improve spacing on very small screens */
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    gap: 0.5rem;
   }
 `;
 
@@ -299,6 +327,12 @@ const Title = styled(motion.h1)`
   @media (max-width: 768px) {
     font-size: 2.5rem;
   }
+  
+  /* Make title more compact on very small screens */
+  @media (max-width: 480px) {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const Subtitle = styled(motion.p)`
@@ -317,6 +351,13 @@ const Subtitle = styled(motion.p)`
 
   @media (max-width: 768px) {
     font-size: 1.2rem;
+  }
+  
+  /* Smaller and more compact subtitle for mobile */
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
   }
 `;
 
@@ -414,7 +455,9 @@ const EmojiAnimationContainer = styled(motion.div)`
   }
   
   @media (max-width: 480px) {
-    height: 300px;
+    height: 250px;
+    width: 100%;
+    margin-bottom: 1rem;
   }
 `;
 
@@ -622,14 +665,39 @@ const Hero = ({ girlfriendName = "Emma", birthDate = "1995-04-15" }) => {
       setShowConfetti(false);
     }, 8000);
     
+    // Add this to fix viewport height on mobile
+    function setVH() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    setVH();
+    window.addEventListener('resize', setVH);
+    
     return () => {
       window.removeEventListener('resize', handleResize);
       clearTimeout(timer);
+      window.removeEventListener('resize', setVH);
     };
   }, [birthDate, contentControls, avatarControls]);
   
   const scrollToGallery = () => {
     document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Update the floating emoji animations for better mobile experience
+  const getEmojiAnimation = (index, windowSize) => {
+    const maxDistance = windowSize.width < 480 ? 100 
+                      : windowSize.width < 768 ? 150
+                      : windowSize.width < 1200 ? 200
+                      : 300;
+    
+    return {
+      x: Math.random() * maxDistance - maxDistance/2,
+      y: Math.random() * maxDistance - maxDistance/2,
+      opacity: [0, 1, 1, 0],
+      rotate: Math.random() * 360
+    };
   };
 
   return (
@@ -823,22 +891,11 @@ const Hero = ({ girlfriendName = "Emma", birthDate = "1995-04-15" }) => {
                     y: 0,
                     opacity: 0
                   }}
-                  animate={{ 
-                    x: windowSize.width < 768 
-                      ? Math.random() * 180 - 90
-                      : windowSize.width < 1200
-                        ? Math.random() * 250 - 125
-                        : Math.random() * 350 - 175,
-                    y: windowSize.width < 768 
-                      ? Math.random() * 180 - 90
-                      : windowSize.width < 1200
-                        ? Math.random() * 250 - 125
-                        : Math.random() * 350 - 175,
-                    opacity: [0, 1, 1, 0],
-                    rotate: Math.random() * 360
-                  }}
+                  animate={getEmojiAnimation(index, windowSize)}
                   transition={{
-                    duration: windowSize.width < 768 ? Math.random() * 3 + 2 : Math.random() * 4 + 3,
+                    duration: windowSize.width < 480 ? Math.random() * 2 + 2 
+                            : windowSize.width < 768 ? Math.random() * 3 + 2 
+                            : Math.random() * 4 + 3,
                     delay: index * 0.2,
                     repeat: Infinity,
                     repeatType: "loop",

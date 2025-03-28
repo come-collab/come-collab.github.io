@@ -545,7 +545,7 @@ const Gallery = () => {
     },
     { 
       src: '/photos/photo3.jpg', 
-      caption: 'Notre évolution ensemble', 
+      caption: 'Au glow up quand même', 
       location: 'La Corniche des Pugets', 
       description: '',
       liked: false
@@ -559,7 +559,7 @@ const Gallery = () => {
     },
     { 
       src: '/photos/photo5.JPG', 
-      caption: 'Nos moments de simplicité', 
+      caption: 'Bg depuis toujours', 
       location: 'Fréjus', 
       description: '',
       liked: false
