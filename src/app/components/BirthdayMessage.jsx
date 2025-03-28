@@ -359,7 +359,7 @@ const BirthdayMessage = ({ girlfriendName = "Emma", yourName = "John" }) => {
    alors que tu célèbres une autre année de ta <span class="highlight">belle vie</span>, 
    j'en profite pour te dire à quel point vivre avec toi m'apporte de la joie et du bonnheur. 
      Tu m'inspires à être une meilleure personne par ta gentillesse, ta force, ton intelligence et par ta maniere de réfléchir.
-     </p><p>En ce jour spécial, je veux que tu saches que j'aime chaque moment que l'on passons ensemble –
+     </p><p>En ce jour spécial, je veux que tu saches que j'aime chaque moment que nous passons ensemble –
       de nos aventures à nos soirées tranquilles à la maison.
       </p><p>Je te promets de continuer à t'aimer, à te faire rire et à être ton partenaire dans de la vie (mais donne moi 12 bizoz).
        Tu ne mérites que du <span class="highlight">bonheur</span>, et je ferai tout ce que je peux pour t'en apporter chaque jour.

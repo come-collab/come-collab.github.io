@@ -616,10 +616,9 @@ const Gallery = () => {
       <TrianglePattern />
       
       <GalleryHeader>
-        <GalleryTitle>Nos Souvenirs Colorés</GalleryTitle>
+        <GalleryTitle>Nos Souvenirs </GalleryTitle>
         <GallerySubtitle>
-          Chaque photo capture un moment dans notre aventure. 
-          Clique sur n'importe quelle photo pour revivre nos <b>aventures spéciales</b> ensemble.
+          Chaque photo capture un moment dans notre aventure.
         </GallerySubtitle>
       </GalleryHeader>
       
