@@ -526,49 +526,49 @@ const Gallery = () => {
       src: '/photos/photo8.jpg', 
       caption: 'Depuis toujours drôle', 
       location: 'Petit Snap', 
-      description: 'Une autre de nos photos les moins flatteuses mais les plus drôles. C\'est ces moments de pure authenticité qui rendent notre relation si spéciale.',
+      description: 'Un humour vreumennnnnnt',
       liked: false
     },
     { 
       src: '/photos/photo1.JPG', 
       caption: 'Notre emménagement à Nantes', 
       location: 'Nantes', 
-      description: 'Le début de notre belle aventure ensemble. Notre premier chez nous, nos premiers pas dans cette ville qui allait devenir notre cocon.',
+      description: '',
       liked: false
     },
     { 
       src: '/photos/photo2.JPG', 
       caption: 'Notre complicité intemporelle', 
       location: 'Cagnes Sur Mer', 
-      description: 'Depuis le début, notre relation est remplie de rires et de joie. Notre amour n\'a fait que grandir au fil du temps, et notre complicité reste intacte.',
+      description: '',
       liked: false
     },
     { 
       src: '/photos/photo3.jpg', 
       caption: 'Notre évolution ensemble', 
       location: 'La Corniche des Pugets', 
-      description: 'À travers les années, nous avons grandi et changé ensemble. Chaque étape nous a rendus plus forts, plus unis.',
+      description: '',
       liked: false
     },
     { 
       src: '/photos/photo4.JPG', 
       caption: 'Ton sourire qui illumine ma vie', 
       location: 'Cagnes Sur Maré', 
-      description: 'Ta personnalité solaire et ton rire contagieux ont toujours été ma source de bonheur. Tu as ce don de rendre chaque moment spécial.',
+      description: '',
       liked: false
     },
     { 
       src: '/photos/photo5.JPG', 
       caption: 'Nos moments de simplicité', 
       location: 'Fréjus', 
-      description: 'Ces instants où on se fiche d\'être moches, où on est juste nous-mêmes. C\'est dans ces moments-là que je t\'aime le plus.',
+      description: '',
       liked: false
     },
     { 
       src: '/photos/photo6.JPG', 
       caption: 'Nos souvenirs', 
       location: 'La Mala', 
-      description: 'Chaque photo, chaque moment passé ensemble raconte notre histoire. Une collection de souvenirs précieux qui continue de s\'enrichir chaque jour.',
+      description: '',
       liked: false
     }
   ];
